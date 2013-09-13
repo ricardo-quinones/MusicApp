@@ -21,6 +21,6 @@ class NotesController < ApplicationController
   private
 
   def current_note
-    Track.find(params[:track_:id]).note
+    Track.find(params[:track_id]).note
   end
 end
