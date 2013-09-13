@@ -9,6 +9,7 @@ class TracksController < ApplicationController
     current_track
     current_album
     current_band
+    @note = (current_track.note.nil? ? Note.new : current_track.note)
   end
 
   def new

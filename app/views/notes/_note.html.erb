@@ -1,0 +1,25 @@
+<% action = track_note_url(track) %>
+<% method = (note.persisted? ? :put : :post) %>
+<% button_text = (note.persisted? ? "Edit note" : "Add note") %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="note[track_id]" value="<%= track.id %>">
+
+  <label>
+    Notes:
+    <br>
+    <textarea
+      name="note[body]"
+      value="<%= note.body %>">
+      <%= note.body %>
+    </textarea>
+  </label>
+  <br>
+  <input type="submit" value="<%= button_text %>">
+</form>

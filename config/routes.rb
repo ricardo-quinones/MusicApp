@@ -3,7 +3,9 @@ MusicApp::Application.routes.draw do
 
   resources :bands, shallow: true do
     resources :albums, shallow: true do
-      resources :tracks
+      resources :tracks, shallow: true do
+        resource :note
+      end
     end
   end
 end
