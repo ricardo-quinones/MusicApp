@@ -1,0 +1,34 @@
+<h1><%= @track.name %></h1>
+
+<table>
+  <tr>
+    <td>Album Name:</td>
+    <td><%= @track.album.name %></td>
+  </tr>
+  <tr>
+    <td>Track No.:</td>
+    <td><%= @track.track_number %></td>
+  </tr>
+  <tr>
+    <td>Track Length:</td>
+    <td><%= @track.formatted_length %></td>
+  </tr>
+  <tr>
+    <td>Bonus Track:</td>
+    <td><%= @track.bonus.camelize %></td>
+  </tr>
+</table>
+
+<p>Lyrics:</p>
+<p>
+<%= @track.lyrics %>
+</p>
+
+<br>
+<%= link_to "Edit Track", edit_track_url(@track) %>
+<br>
+<%= link_to @album.name, album_url(@album) %>
+<br>
+<%= link_to @band.name, band_url(@band) %>
+<br>
+<%= button_to "Delete Track", track_url(@track), method: :delete %>

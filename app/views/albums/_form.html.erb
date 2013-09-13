@@ -1,0 +1,53 @@
+<% action = (album.persisted? ? album_url(album) : band_albums_url) %>
+<% method = (album.persisted? ? :put : :post) %>
+<% heading = (album.persisted? ? "Edit an Existing Album" : "Add a New Album") %>
+<% button_text = (album.persisted? ? "Edit Album" : "Add Album") %>
+<% url = (album.persisted? ? album_url(album) : band_url(band)) %>
+<% type = album.live_or_studio %>
+
+<h1><%= heading %></h1>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value ="<%= method %>">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <label>
+    Band Name:
+    <select name="album[band_id]">
+      <option></option>
+      <% Band.all.each do |band| %>
+        <option value="<%= band.id %>" <%= "selected" if band == @band %>>
+          <%= band.name %>
+        </option>
+      <% end %>
+    </select>
+  </label>
+  <br>
+  <label>
+    Album Name:
+    <input type="text" name="album[name]" value="<%= album.name %>">
+  </label>
+  <br>
+
+  <label>
+    Album Type:
+    <% %w(live studio).each do |option| %>
+      <label>
+        <%= option.camelize %>
+        <input type="radio"
+          name="album[live_or_studio]"
+          value="<%= option %>"
+          <%= type == option ? "checked" : "" %>>
+      </label>
+    <% end %>
+  </label>
+
+  <br>
+
+  <input type="submit" value="<%= button_text %>">
+</form>
+
+<%= button_to "Cancel", url, method: :get %>

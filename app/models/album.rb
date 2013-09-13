@@ -3,6 +3,7 @@ class Album < ActiveRecord::Base
 
   validates :band_id, :name, presence: true
   validates :live_or_studio, presence: { in: %w(live studio)}
+  validates :name, uniqueness: true
 
   belongs_to :band
   has_many :tracks

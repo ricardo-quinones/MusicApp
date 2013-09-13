@@ -1,0 +1,28 @@
+<h1><%= @album.name %></h1>
+
+<p><%= "#{@album.live_or_studio.camelize} Album" %></p>
+<table>
+  <th>Track No.</th>
+  <th>Track Name</th>
+  <th>Length</th>
+  <% @album.tracks.each do |track| %>
+  <% bonus = (track.bonus == "yes" ? "*" : "") %>
+  <% link_to_track = (link_to "#{bonus}#{track.name}", track_url(track)) %>
+    <tr>
+      <td align="center"><%= track.track_number %></td>
+      <td align="center"><%= link_to_track %></td>
+      <td align="center"><%= track.formatted_length %></td>
+    </tr>
+  <% end %>
+</table>
+<p>* = Bonus Track</p>
+
+<%= link_to "Add Track", new_album_track_url(@album) %>
+<br>
+<%= link_to "Edit Album", edit_album_url(@album) %>
+<br>
+<%= link_to "All Albums for #{@band.name}", band_albums_url(@band) %>
+<br>
+<%= link_to @band.name, band_url(@band) %>
+<br>
+<%= button_to "Delete Album", album_url(@album), method: :delete %>

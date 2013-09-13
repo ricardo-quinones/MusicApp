@@ -1,0 +1,77 @@
+<% action = (track.persisted? ? track_url(track) : album_tracks_url) %>
+<% method = (track.persisted? ? :put : :post) %>
+<% heading = (track.persisted? ?  "Edit a track" : "Add a track") %>
+<% button_text = (track.persisted? ? "Update track" : "Add track") %>
+<% url = (track.persisted? ? track_url(track) : album_url(album)) %>
+<%= flash[:notice].nil? ? nil : flash[:notice] %>
+
+<h1><%= heading %></h1>
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="track[album_id]" value="<%= album.id %>">
+
+  <label>
+    Album Name:
+    <select name="track[album_id]">
+      <option></option>
+      <% @band_albums.each do |band_album| %>
+        <option
+          value="<%= band_album.id %>"
+          <%= "selected" if band_album.id == album.id %>>
+          <%= band_album.name %>
+        </option>
+      <% end %>
+    </select>
+   </label>
+  <br>
+  <label>
+    Track No.:
+    <input
+      type="text"
+      name="track[track_number]"
+      value="<%= track.track_number %>">
+  </label>
+  <br>
+  <label>
+    Track Name:
+    <input type="text" name="track[name]" value="<%= track.name %>">
+  </label>
+  <br>
+  <label>
+    Track Length(mm:ss):
+    <input type="text"
+      name="track[length]"
+      value="<%= track.formatted_length if track.persisted? %>">
+  </label>
+  <br>
+  <label>
+    Bonus Track:
+    <% %w(yes no).each do |option| %>
+      <label>
+        <%= option.camelize %>
+        <input type="radio"
+          name="track[bonus]"
+          value="<%= option %>"
+          <%= track.bonus == option ? "checked" : "" %>>
+      </label>
+    <% end %>
+  </label>
+  <br>
+  <label>
+    Lyrics:
+    <br>
+    <textarea
+      name="track[lyrics]"
+      value="<%= track.lyrics %>">
+      <%= track.lyrics %>
+    </textarea>
+  </label>
+  <br>
+  <input type="submit" value="<%= button_text %>">
+</form>
+<%= button_to "Cancel", url, method: :get %>
