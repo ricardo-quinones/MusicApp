@@ -26,6 +26,8 @@ class TracksController < ApplicationController
 
   def create
     @track = Track.new(params[:track])
+    @album = @track.album
+    @band_albums = @album.band.albums
     if @track.save
       redirect_to album_url(@track)
     else

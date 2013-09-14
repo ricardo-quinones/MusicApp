@@ -11,6 +11,10 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+# gem 'letter_opener', group: :development
+
+gem 'bcrypt-ruby'
+require 'bcrypt'
 
 
 # Gems used only for assets and not required

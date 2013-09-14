@@ -16,4 +16,6 @@
 <br>
 <%= link_to "Back to All Bands", bands_url %>
 <br>
-<%= button_to "Delete Band", band_url(@band), method: :delete %>
+<% if is_admin? %>
+  <%= button_to "Delete Band", band_url(@band), method: :delete %>
+<% end %>

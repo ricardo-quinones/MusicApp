@@ -1,0 +1,9 @@
+Welcome to Band Awesomeness, <%= @user.email %>
+===============================================
+
+To fully acivate your account for Band Awesomeness,
+please follow this link:
+
+<%= link_to @url, new_user_url(@user.activation_token) %>
+
+Thanks for joining and have a great day!

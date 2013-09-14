@@ -9,3 +9,7 @@
 </ul>
 
 <%= link_to "Add album", new_band_album_url(@band.id) %>
+<br>
+<%= link_to @band.name, band_url(@band) %>
+<br>
+<%= link_to "Back to All Bands", bands_url %>

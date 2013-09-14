@@ -3,7 +3,6 @@
 <% heading = (band.persisted? ?  "Edit a band" : "Add a band") %>
 <% button_text = (band.persisted? ? "Update band" : "Add band") %>
 <% url = (band.persisted? ? band_url(band) : bands_url) %>
-<%= flash[:notice].nil? ? nil : flash[:notice] %>
 
 <h1><%= heading %></h1>
 <form action="<%= action %>" method="post">

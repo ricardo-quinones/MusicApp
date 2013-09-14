@@ -3,7 +3,7 @@ class Track < ActiveRecord::Base
 
   validates :name, :album_id, :length_in_seconds, presence: true
   validates :bonus, presence: { in: %w(yes no)}
-  validates :name, uniqueness: true
+  validates :name, :track_number, uniqueness: true
 
   belongs_to :album
   has_one :note

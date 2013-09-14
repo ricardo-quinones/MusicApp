@@ -25,4 +25,6 @@
 <br>
 <%= link_to @band.name, band_url(@band) %>
 <br>
-<%= button_to "Delete Album", album_url(@album), method: :delete %>
+<% if is_admin? %>
+  <%= button_to "Delete Album", album_url(@album), method: :delete %>
+<% end %>

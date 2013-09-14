@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913211822) do
+ActiveRecord::Schema.define(:version => 20130914001650) do
 
   create_table "albums", :force => true do |t|
     t.integer  "band_id",        :null => false
@@ -55,5 +55,21 @@ ActiveRecord::Schema.define(:version => 20130913211822) do
 
   add_index "tracks", ["album_id"], :name => "index_tracks_on_album_id"
   add_index "tracks", ["name"], :name => "index_tracks_on_name"
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                                :null => false
+    t.string   "password_digest",                      :null => false
+    t.string   "session_token",                        :null => false
+    t.boolean  "admin",             :default => false
+    t.boolean  "activation_status", :default => false
+    t.string   "activation_token"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
+  add_index "users", ["admin"], :name => "index_users_on_admin"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["session_token"], :name => "index_users_on_session_token", :unique => true
 
 end

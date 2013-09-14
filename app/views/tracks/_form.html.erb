@@ -3,7 +3,6 @@
 <% heading = (track.persisted? ?  "Edit a track" : "Add a track") %>
 <% button_text = (track.persisted? ? "Update track" : "Add track") %>
 <% url = (track.persisted? ? track_url(track) : album_url(album)) %>
-<%= flash[:notice].nil? ? nil : flash[:notice] %>
 
 <h1><%= heading %></h1>
 <form action="<%= action %>" method="post">
