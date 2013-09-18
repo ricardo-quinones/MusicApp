@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_filter :require_user_is_logged_in!, only: [:new, :create]
+  skip_before_filter :require_user_is_logged_in!, only: [:new, :create, :activate]
 
   def new
   end
@@ -19,15 +19,18 @@ class UsersController < ApplicationController
   end
 
   def activate
-    user = User.find_by_activation_token(params[:token])
 
-    if user.nil?
-      flash[:notice] = "Sorry, we couldn't activate your account."
+    @user = User.find_by_activation_token(params[:format])
+
+    if @user.nil?
+      flash[:notice] = params
+
       redirect_to new_session_url
+
     else
-      user.update_attributes(activation_status: true)
-      self.current_user = user
-      flash[:notice] = "Welcome to Band Awesomeness, #{user.email}!"
+      @user.activation_status = true
+      self.current_user = @user
+      flash[:notice] = "Welcome to Band Awesomeness, #{@user.email}!"
       redirect_to bands_url
     end
   end

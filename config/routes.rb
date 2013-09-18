@@ -4,9 +4,11 @@ MusicApp::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
 
-  post '/users/activate?token=:token' => 'users#activate'
+  get '/users/activate?token=:token' => 'users#activate',
+    as: "activate_user",
+    path: 'users/activate'
 
-  resources :bands, shallow: true do
+  resources :bands, shallow: true,  do
     resources :albums, shallow: true do
       resources :tracks, shallow: true do
         resource :note
